@@ -1,8 +1,9 @@
 CXX = g++
-CXXFLAGS = -Werror -Wpedantic -Wall -std=c++17 -Iinclude
+CXXFLAGS = -Werror -Wpedantic -Wall -std=c++17 -Iinclude -I./libs/eigen-3.4.0
 
 BUILDDIR = build
 BINDIR = bin
+MATRIX = $(wildcard *.csv)
 
 TARGET = $(BINDIR)/Start
 
@@ -38,6 +39,6 @@ $(BUILDDIR)/test.o: test.cpp | $(BUILDDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
  
 clean:
-	rm -rf $(BUILDDIR) $(BINDIR)
+	rm -rf $(BUILDDIR) $(BINDIR) $(MATRIX) $(OUTPUT_MATRIX)
 
 .PHONY: all clean test
