@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - main
+      - Add_Main_Programm
 
   pull_request:
     branches:
       - main
+      - Add_Main_Programm
 
 
 jobs:
