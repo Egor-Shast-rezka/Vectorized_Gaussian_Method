@@ -8,7 +8,7 @@ MATRIX = $(wildcard *.csv)
 TARGET = $(BINDIR)/Start
 
 SRCS_MAIN = gaussian_method.cpp main.cpp
-SRCS_TEST = test.cpp
+SRCS_TEST = gaussian_method.cpp test.cpp
 
 OBJS_MAIN = $(patsubst %.cpp, $(BUILDDIR)/%.o, $(SRCS_MAIN))
 OBJS_TEST = $(patsubst %.cpp, $(BUILDDIR)/%.o, $(SRCS_TEST))

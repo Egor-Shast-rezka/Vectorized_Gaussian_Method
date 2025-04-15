@@ -34,10 +34,10 @@ private:
     
     double random_double(bool onlyPositive);
     
+public:
+    
     Eigen::MatrixXd random_matrix(int size);
     
-public:
-
     Eigen::MatrixXd read_CSV(const std::string& filename);
 
     Eigen::MatrixXd method_gaus(Eigen::MatrixXd& matrix);
