@@ -6,7 +6,7 @@ Contact: st129457@student.spbu.ru,egor.shast0.0@gmail.com
 
 ## Overview
 
-...
+This program reads a matrix from a CSV file, performs the Gauss method on it to transform it to a triangular shape, and saves the result to a new CSV file. If the source file is not found, the program automatically creates a random matrix.
 
 ## Table of Contents
 - [Installation and Build](#installation-and-build)

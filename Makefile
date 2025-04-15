@@ -1,13 +1,14 @@
 CXX = g++
-CXXFLAGS = -Werror -Wpedantic -Wall -std=c++17 -Iinclude
+CXXFLAGS = -Werror -Wpedantic -Wall -std=c++17 -Iinclude -I./libs/eigen-3.4.0
 
 BUILDDIR = build
 BINDIR = bin
+MATRIX = $(wildcard *.csv)
 
 TARGET = $(BINDIR)/Start
 
 SRCS_MAIN = gaussian_method.cpp main.cpp
-SRCS_TEST = test.cpp
+SRCS_TEST = gaussian_method.cpp test.cpp
 
 OBJS_MAIN = $(patsubst %.cpp, $(BUILDDIR)/%.o, $(SRCS_MAIN))
 OBJS_TEST = $(patsubst %.cpp, $(BUILDDIR)/%.o, $(SRCS_TEST))
@@ -38,6 +39,6 @@ $(BUILDDIR)/test.o: test.cpp | $(BUILDDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
  
 clean:
-	rm -rf $(BUILDDIR) $(BINDIR)
+	rm -rf $(BUILDDIR) $(BINDIR) $(MATRIX)
 
 .PHONY: all clean test
