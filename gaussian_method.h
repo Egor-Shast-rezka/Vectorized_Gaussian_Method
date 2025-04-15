@@ -1,7 +1,9 @@
 /*
     Egor Shastin st129457@student.spbu.ru
     
-    
+    > Is the header file that declares the Matrix_tools class and its interface. 
+    > It is used to declare all auxiliary methods necessary for working with matrices, 
+    reading/writing files, and solving a system of equations using the Gauss method.
 */
 
 #include <iostream>

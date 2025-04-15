@@ -39,6 +39,6 @@ $(BUILDDIR)/test.o: test.cpp | $(BUILDDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
  
 clean:
-	rm -rf $(BUILDDIR) $(BINDIR) $(MATRIX) $(OUTPUT_MATRIX)
+	rm -rf $(BUILDDIR) $(BINDIR) $(MATRIX)
 
 .PHONY: all clean test

@@ -1,7 +1,9 @@
 /*
     Egor Shastin st129457@student.spbu.ru
     
-    This is code for unit testing all classes by using Google Test
+    > A file with unit tests based on Google Test. 
+    > Checks the correctness of various operations related to matrix processing: 
+    reading, writing, transformations, and generation.
 */
 
 #include "gaussian_method.h"
@@ -12,9 +14,13 @@
 // ================== create_test_csv ==================
 
 void create_test_csv(const std::string& filename, const std::vector<std::vector<double>>& data) {
+
     std::ofstream file(filename);
+    
     for (const auto& row : data) {
+    
         for (size_t i = 0; i < row.size(); ++i) {
+        
             file << row[i];
             if (i != row.size() - 1) file << ",";
         }
@@ -23,6 +29,20 @@ void create_test_csv(const std::string& filename, const std::vector<std::vector<
     file.close();
 }
 
+
+// ================== check_big_matrix ==================
+
+bool check_big_matrix(Eigen::MatrixXd& matrix) {
+    
+    for (int i = 1; i < matrix.rows(); ++i) {
+        if (matrix(i, 0) != 0) return false;
+    }
+
+    for (int j = 0; j < matrix.cols() - 1; ++j) {
+        if (matrix(matrix.rows() - 1, j) != 0) return false;
+    }
+    return true;
+}
 
 // ================== ReadCSV Test ==================
 
@@ -94,6 +114,29 @@ TEST(MatrixToolsTest, WriteCSV) {
     std::getline(file, line);
     ASSERT_NE(line.find("1.1"), std::string::npos);
     file.close();
+}
+
+
+// ================== Test With Big Matrix ==================
+
+TEST(MatrixToolsTest, TestWithBigMatrix) {
+    
+    Matrix_tools Matrix_tools;
+    
+    std::random_device rd;
+    
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(20, 100);      
+    
+    for (int i = 0; i < 40; ++i) {
+    
+        Eigen::MatrixXd matrix = Matrix_tools.random_matrix(dis(gen));
+        Matrix_tools.method_gaus(matrix);
+        
+        EXPECT_TRUE(check_big_matrix(matrix));
+        if (!check_big_matrix(matrix)) break;
+        if (i % 10 == 0) std::cout << "10 random Matrix cheked.\n";
+    }
 }
 
 

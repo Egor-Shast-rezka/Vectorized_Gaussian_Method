@@ -1,7 +1,8 @@
 /*
     Egor Shastin st129457@student.spbu.ru
     
-    
+    > The main source file, which implements the logic of working with matrices: reading from CSV, generating random data, 
+    performing step-by-step matrix transformation, recording the result and auxiliary mathematical operations.
 */
 
 #include "gaussian_method.h"
@@ -116,7 +117,10 @@ Eigen::MatrixXd Matrix_tools::truth_form(Eigen::MatrixXd& mat, int current_row, 
         rows.push_back(mat.row(i));
     }
 
-    std::sort(rows.begin() + current_row, rows.end(), [current_col](const Eigen::VectorXd& a, const Eigen::VectorXd& b) {
+    std::sort(rows.begin() + current_row, rows.end(), 
+        [current_col](const Eigen::VectorXd& a, const Eigen::VectorXd& b) {
+        
+            if (current_col >= a.size() || current_col >= b.size()) return false;
             
             if (a(current_col) != 0 && b(current_col) != 0) {
             
@@ -158,14 +162,12 @@ Eigen::MatrixXd Matrix_tools::method_gaus(Eigen::MatrixXd& matrix) {
             }
         }
         for (int current_row_2 = current_row+1; current_row_2 < matrix.rows(); ++current_row_2) {
-            
-            while (matrix(current_row_2, current_col) == 0) {
-            
+
+            while (current_col < matrix.cols() - 1 && matrix(current_row, current_col) == 0) {
                 current_col++;
-                if (current_col == matrix.cols()-1) {
-                
-                    return matrix;
-                }
+            }
+            if (current_col == matrix.cols() - 1) {
+                return matrix;
             }
             
             double num = matrix(current_row_2, current_col) / matrix(current_row, current_col);
